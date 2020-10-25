@@ -13,3 +13,10 @@ export type FileReading = {
   variableName?: string;
   unit?: string;
 }[];
+
+export type Column = {
+  id: 'register' | 'value' | 'variable' | 'unit';
+  label: string;
+  minWidth?: number;
+  align?: 'right' | 'center' | 'left';
+};

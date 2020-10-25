@@ -13,12 +13,29 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { TablePagination } from '@material-ui/core';
 
 import { formatObject } from '../../helper/useFetch';
 import { RegisterValues } from '../../types';
+import { columns } from '../../data';
+
+import './styles.css';
 
 export default function Home() {
   const [data, setData] = useState<RegisterValues>();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,44 +57,71 @@ export default function Home() {
   return (
     <>
       {data ? (
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label='customized table'>
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align='center'>Register</StyledTableCell>
-                <StyledTableCell align='center'>Value</StyledTableCell>
-                <StyledTableCell align='center'>Variable Name</StyledTableCell>
-                <StyledTableCell align='center'>Unit</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.fileReadings.map(({ reading, variableName, unit }, idx) => (
-                <StyledTableRow key={`reading value-${idx}`} hover>
-                  <StyledTableCell align='center'>{idx + 1}</StyledTableCell>
-                  <StyledTableCell align='center'>{reading}</StyledTableCell>
-                  <StyledTableCell align='center'>
-                    {variableName}
-                  </StyledTableCell>
-                  <StyledTableCell align='center'>{unit}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Paper className={classes.root}>
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label='sticky table'>
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <StyledTableHead
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </StyledTableHead>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.fileReadings
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(({ reading, variableName, unit }, idx) => {
+                    return (
+                      <StyledTableRow
+                        hover
+                        role='checkbox'
+                        tabIndex={-1}
+                        key={`reading value-${idx}`}
+                      >
+                        <TableCell align='center'>{idx + 1}</TableCell>
+                        <TableCell align='center'>{reading}</TableCell>
+                        <TableCell align='center'>{variableName}</TableCell>
+                        <TableCell align='center'>{unit}</TableCell>
+                      </StyledTableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component='div'
+            count={data.fileReadings.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
       ) : (
-        <div>Data is inaccessible</div>
+        <div className='error'>Data is inaccessible</div>
       )}
     </>
   );
 }
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
+  root: {
+    width: '100%',
+    marginTop: '10%',
+  },
+  container: {
+    maxHeight: 440,
   },
 });
 
-const StyledTableCell = withStyles((theme: Theme) =>
+const StyledTableHead = withStyles((theme: Theme) =>
   createStyles({
     head: {
       backgroundColor: '#1f6f8b',

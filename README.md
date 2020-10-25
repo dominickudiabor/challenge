@@ -1,44 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Gambit challenge
 
-## Available Scripts
+##Problem Description
+This is a challenge designed by Gambit. The data is retrieved from [Live data](http://tuftuf.gambitlabs.fi/feed.txt). This data comprises of a date timestamp and values of first 100 registers. More information on registers are available on pages 39-42 of [docs/tuf-2000m.pdf](https://github.com/gambit-labs/tuf-2000m/blob/master/docs/tuf-2000m.pdf).
 
-In the project directory, you can run:
+Developers are required to chose one of the two options to test their skills:
 
-### `yarn start`
+- Option 1:
+  Create a program that parses the data, converts it to human readable data like integers, decimals and strings and presents it in a nice way. Depending on your skills and interests you can create a web service that will provide the conversion data, or you could even create a UI to visualize the data somehow, it is entirely up to you what you make of it!
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Option 2:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Presenting your solution
+Provide your solution as a Git repository, e-mail me the link to your private repo, or as a zip file and describe your solution either in the mail or using the README markdown. We appreciate if you can host your solution somewhere in the cloud so we can see an actual demo of it, rather than just looking at code.
 
-### `yarn test`
+I have not worked with data conversions which are not native to Javascript, so I decided to attempt the second option. Solving the first option would require a learning curve to which I look forward tp eagerly. However ,due to time constraint I would focus on the second option in this repo.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Built With
 
-### `yarn build`
+- [React](https://reactjs.org/) - The web framework used.
+- [TypeScript](https://www.typescriptlang.org/) - For typing the data..
+- [Axios](https://www.npmjs.com/package/axios) - Package for fetching data.
+- [Material UI](https://d3js.org) - For User interface.
+- React version 17.0.1 .
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This web application is deployed in [Netlify]().
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Requirements
 
-### `yarn eject`
+All dependencies can be installed using
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+yarn install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Description
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The data is fetched.

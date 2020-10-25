@@ -1,22 +1,24 @@
+import { FileReading } from '../types';
+
 export const formatObject = (file: string) => {
   const fileArray = file.match(/[^\r\n]+/g) as string[];
   const time = fileArray[0];
-  const timeline = time.trim().slice(0, time.indexOf(' '));
+  const timeLine = time.trim().slice(0, time.indexOf(' '));
   const timeStamp = time.slice(time.indexOf(' '));
-  const fileReadings = fileArray
+  const fileReadings: FileReading = fileArray
     .slice(1)
     .map((a) => {
       return a.split(':').map((b) => b.trim());
     })
     .map((e) => {
-      return { [e[0]]: e[1] };
+      return { reading: e[1] };
     });
   const formatObject = (index: number, variableName: string, unit: string) => {
     if (index >= 0 && index < 49) {
       for (let i = index; i < index + 2; i++) {
         fileReadings[i] = {
           ...fileReadings[i],
-          variableName: variableName,
+          variableName,
           unit,
         };
       }
@@ -121,5 +123,5 @@ export const formatObject = (file: string) => {
   );
   formatObject(98, 'Reynolds number', '');
 
-  return { timeline, timeStamp, fileReadings };
+  return { timeLine, timeStamp, fileReadings };
 };

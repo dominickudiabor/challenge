@@ -44,7 +44,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://tuftuf.gambitlabs.fi/feed.txt'
+          ' https://cors-anywhere.herokuapp.com/http://tuftuf.gambitlabs.fi/feed.txt'
         );
         const registerData = formatObject(response.data) as RegisterValues;
         !data && setData(registerData);

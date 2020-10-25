@@ -118,7 +118,7 @@ export default function Home() {
           />
         </Paper>
       ) : (
-        <div className='error'>Data is inaccessible</div>
+        <div className='error'>Loading data ...</div>
       )}
     </>
   );

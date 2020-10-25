@@ -14,6 +14,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { TablePagination } from '@material-ui/core';
+import SearchBar from 'material-ui-search-bar';
 
 import { formatObject } from '../../helper/useFetch';
 import { RegisterValues } from '../../types';
@@ -25,11 +26,13 @@ export default function Home() {
   const [data, setData] = useState<RegisterValues>();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [query, setQuery] = useState('');
+
+  const handleQuery = (newValue: string) => setQuery(newValue);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -53,11 +56,20 @@ export default function Home() {
   }, [data]);
 
   const classes = useStyles();
-
+  const filteredSearch = data?.fileReadings.filter((a) =>
+    a.variableName?.toLowerCase().includes(query.toLowerCase())
+  );
   return (
     <>
       {data ? (
         <Paper className={classes.root}>
+          <SearchBar
+            className='searchBar'
+            value={query}
+            onChange={handleQuery}
+            closeIcon={<div></div>}
+            searchIcon={<div></div>}
+          />
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label='sticky table'>
               <TableHead>
@@ -74,23 +86,24 @@ export default function Home() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.fileReadings
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(({ reading, variableName, unit }, idx) => {
-                    return (
-                      <StyledTableRow
-                        hover
-                        role='checkbox'
-                        tabIndex={-1}
-                        key={`reading value-${idx}`}
-                      >
-                        <TableCell align='center'>{idx + 1}</TableCell>
-                        <TableCell align='center'>{reading}</TableCell>
-                        <TableCell align='center'>{variableName}</TableCell>
-                        <TableCell align='center'>{unit}</TableCell>
-                      </StyledTableRow>
-                    );
-                  })}
+                {filteredSearch &&
+                  filteredSearch
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map(({ reading, variableName, unit, register }, idx) => {
+                      return (
+                        <StyledTableRow
+                          hover
+                          role='checkbox'
+                          tabIndex={-1}
+                          key={`reading value-${idx}`}
+                        >
+                          <TableCell align='center'>{register}</TableCell>
+                          <TableCell align='center'>{reading}</TableCell>
+                          <TableCell align='center'>{variableName}</TableCell>
+                          <TableCell align='center'>{unit}</TableCell>
+                        </StyledTableRow>
+                      );
+                    })}
               </TableBody>
             </Table>
           </TableContainer>

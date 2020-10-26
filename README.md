@@ -14,8 +14,8 @@ Developers are required to chose one of the two options to test their skills:
 ## Built With
 
 - [React](https://reactjs.org/) - The web framework used.
-- [TypeScript](https://www.typescriptlang.org/) - For typing the data..
-- [Axios](https://www.npmjs.com/package/axios) - Package for fetching data.
+- [TypeScript](https://www.typescriptlang.org/) - For typing JavaScript.
+- [Axios](https://www.npmjs.com/package/axios) - Module for fetching data.
 - [Material UI](https://d3js.org) - For User interface.
 - React version 17.0.1 .
 
@@ -38,4 +38,5 @@ I have not previously worked with data conversions which are not native to Javas
 ## Important Files
 
 useFetch.ts - Contains the lpogic for fetching and formatting the data
+
 home/index.tsx - Contains The entry view for the application.

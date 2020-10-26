@@ -123,5 +123,7 @@ export const formatObject = (file: string) => {
   );
   formatObject(98, 'Reynolds number', '');
 
+  fileReadings.map((a, idx) => (a.register = idx + 1));
+
   return { timeLine, timeStamp, fileReadings };
 };

@@ -25,7 +25,7 @@ I have not worked with data conversions which are not native to Javascript, so I
 
 ## Deployment
 
-This web application is deployed in [Netlify]().
+This web application is deployed in [Netlify](https://dominic-gambit-challenge.netlify.app/).
 
 ## Requirements
 
@@ -37,4 +37,9 @@ yarn install
 
 ## Description
 
-The data is fetched.
+The data is fetched using useEffect Hook , formatted and saved in the local state. The data is displayed in a table with search functionality and pagination.
+
+## Important Files
+
+useFetch.ts - Contains the lpogic for fetching and formatting the data
+home/index.tsx - Contains The entry view for the application.

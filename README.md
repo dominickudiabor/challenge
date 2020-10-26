@@ -10,11 +10,6 @@ Developers are required to chose one of the two options to test their skills:
 
 - Option 2:
 
-Presenting your solution
-Provide your solution as a Git repository, e-mail me the link to your private repo, or as a zip file and describe your solution either in the mail or using the README markdown. We appreciate if you can host your solution somewhere in the cloud so we can see an actual demo of it, rather than just looking at code.
-
-I have not worked with data conversions which are not native to Javascript, so I decided to attempt the second option. Solving the first option would require a learning curve to which I look forward tp eagerly. However ,due to time constraint I would focus on the second option in this repo.
-
 ## Built With
 
 - [React](https://reactjs.org/) - The web framework used.
@@ -37,7 +32,7 @@ yarn install
 
 ## Description
 
-The data is fetched using useEffect Hook , formatted and saved in the local state. The data is displayed in a table with search functionality and pagination.
+I have not previously worked with data conversions which are not native to Javascript, so I decided to attempt the second option. The data is fetched using useEffect Hook over an HTTPS connection. To avoid a CORS errors I used a proxy. Once the data is fetched I formated is as an object with descriptive properties as given in the documentation. The object is then saved in local state. The data is displayed in a table with search functionality and pagination.
 
 ## Important Files
 

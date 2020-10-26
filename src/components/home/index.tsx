@@ -24,21 +24,9 @@ import './styles.css';
 
 export default function Home() {
   const [data, setData] = useState<RegisterValues>();
+  const [query, setQuery] = useState('');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [query, setQuery] = useState('');
-
-  const handleQuery = (newValue: string) => setQuery(newValue);
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,6 +42,18 @@ export default function Home() {
     };
     fetchData();
   }, [data]);
+
+  const handleQuery = (newValue: string) => setQuery(newValue);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const classes = useStyles();
   const filteredSearch = data?.fileReadings.filter((a) =>
